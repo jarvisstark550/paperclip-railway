@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import { startServer } from '@paperclipai/server';
 import express from 'express';
 
 dotenv.config();
@@ -18,21 +17,13 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// Start Paperclip server
-startServer({
-  app,
-  port: port as number,
-  databaseUrl: process.env.DATABASE_URL,
-  env: {
-    PAPERCLIP_AGENT_JWT_SECRET: process.env.PAPERCLIP_AGENT_JWT_SECRET!,
-    ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY!,
-    PAPERCLIP_API_KEY: process.env.PAPERCLIP_API_KEY!,
-    PAPERCLIP_BASE_URL: process.env.PAPERCLIP_BASE_URL,
-  },
-}).then(() => {
-  console.log(`🚀 Paperclip server running on port ${port}`);
-  console.log(`📎 Base URL: ${process.env.PAPERCLIP_BASE_URL || \`http://localhost:\${port}\`}`);
-}).catch(err => {
-  console.error('Failed to start server:', err);
-  process.exit(1);
+// Basic health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok', message: 'Paperclip server is running' });
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`Paperclip server running on port ${port}`);
+  console.log(`Base URL: ${process.env.PAPERCLIP_BASE_URL || `http://localhost:${port}`}`);
 });
