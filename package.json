@@ -1,0 +1,30 @@
+{
+  "name": "paperclip-railway",
+  "version": "1.0.0",
+  "description": "Paperclip AI Agent Orchestration - Railway Deployment",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "npm run build:server",
+    "build:server": "tsc",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@paperclipai/server": "^2026.325.0",
+    "dotenv": "^17.0.1",
+    "drizzle-orm": "^0.38.4",
+    "express": "^5.1.0",
+    "paperclipai": "^2026.325.0",
+    "postgres": "^3.4.9",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.6.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
